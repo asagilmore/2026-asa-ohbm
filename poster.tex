@@ -126,15 +126,13 @@ in a range of existing and new datasets to assess the role of brain blood
 vessels in aging and in brain health. The methods are provided as open-source
 software at https://github.com/nrdg/anat2vessels.
 
-\rule{\linewidth}{0.4pt}
+\rule{\linewidth}{2pt}
 
 %----------------------------------------------------------------------------
 %	MATERIALS AND METHODS
 %----------------------------------------------------------------------------
-
 \normalsize
-\section*{Materials and Methods}
-
+\section*{Methods}
 \subsection*{Dataset}
 We used the publicly available IXI dataset (\url{http://brain-development.org/ixi-dataset/}),
 containing T1w, T2w, and MRA for N=567 subjects.
@@ -146,7 +144,6 @@ stratified by scanner.
 Instead of using the raw MRA images as labels, we used
 COSTA (xxx Cite), a pretrained model for segmenting blood vessels in MRA, to produce binary
 vessel masks from the MRA images to use as training labels.
-
 
 \subsection*{Model / Algorithm}
 
@@ -238,12 +235,30 @@ For validation, we use two separate datasets, CamCan, which does not contain
 ground truth MRA, and OASIS3, which contains MRA, as well as T1w, and T2w scans,
 within one year from cognitive assessments.
 
-\subsection*{Acknowledgements}
+\rule{\linewidth}{2pt}
+
+\color{SaddleBrown}
+\section*{Conclusions}
+
+\begin{itemize}
+\large
+    \item Despite relatively low dice scores, the vessel features extracted from
+    anatomical MRI are predictive in downstream tasks, and capture individual variance well.
+    \item Vessel features extracted from Anatomical MRI are systematically biased
+    relative to ground truth.
+    \item Model features are linked to both cognitive ability (particularly within older individuals),
+    and to blood pressure, consistent with previous findings (xxx cite).
+\end{itemize}
+
+\color{DarkSlateGray}
+
+\color{DarkSlateGray}
+\section*{Acknowledgements}
 \footnotesize This work was funded by National Institutes of Health grants MH121868,
 MH121867, EB027585, R01AG060942, and U19AG066567, as well as by National
 Science Foundation grant 1934292 and by Research to Prevent Blindness.
 
-Preliminary testing for this work was completed on Hyak, UW’s high performance
+Preliminary testing for this work was completed on Hyak, UW's high performance
 computing cluster. This resource was funded by the UW student technology fee.
 
 Data collection and sharing for this project was provided by the Cambridge
@@ -258,9 +273,13 @@ P30 AG066444, P50 AG00561, P30 NS09857781, P01 AG026276, P01 AG003991, R01
 AG043434, UL1 TR000448, R01 EB009352.
 
 Thanks to Kendrick Kay and Aviv Mezer for helpful discussions of this work.
-% Funder logos — replace \logoplaceholder with \includegraphics when ready:
-% \logoplaceholder{2.6cm}{Funder 1}
-% \logoplaceholder{2.6cm}{Funder 2}
+
+%----------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------
+% Dummy references — replace with your own entries or switch to BibTeX:
+%   \bibliographystyle{plain}
+%   \bibliography{your-bib-file}
 
 \columnbreak
 
@@ -270,6 +289,7 @@ Thanks to Kendrick Kay and Aviv Mezer for helpful discussions of this work.
 
 \normalsize
 \color{Navy}
+\captionsetup{textfont={color=Navy},labelfont={bf,color=Navy}}
 \section*{Results}
 
 \subsection*{Training Results}
@@ -331,30 +351,9 @@ the median. Examples of three different individuals with Dice coefficients of
 \end{minipage}
 \\
 
-%------------------------------------------------
+\color{Black}
+\rule{\linewidth}{2pt}
 
-\color{SaddleBrown}
-
-\section*{Conclusions}
-
-\begin{itemize}
-\large
-    \item Despite relatively low dice scores, the vessel features extracted from
-    anatomical MRI are predictive in downstream tasks, and capture individual variance well.
-    \item Vessel features extracted from Anatomical MRI are systematically biased
-    relative to ground truth.
-    \item Model features are linked to both cognitive ability (particularly within older individuals),
-    and to blood pressure, consistent with previous findings (xxx cite).
-\end{itemize}
-
-\color{DarkSlateGray}
-
-%----------------------------------------------------------------------------
-%	REFERENCES
-%----------------------------------------------------------------------------
-% Dummy references — replace with your own entries or switch to BibTeX:
-%   \bibliographystyle{plain}
-%   \bibliography{your-bib-file}
 
 \begin{thebibliography}{9}
 \footnotesize
