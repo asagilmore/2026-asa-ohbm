@@ -1,0 +1,6 @@
+*.bib
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+.vscode

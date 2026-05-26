@@ -90,7 +90,7 @@ using deep learning} \color{Black}\\
          4. Department of Ophthalmology, University of Washington,
          5. Roger and Angie Karalis Johnson Retina Center, University of Washington \\
   \Large Contact: \texttt{arokem@uw.edu}
-         $|$ Download: \texttt{}
+         $|$ Download: \texttt{https://github.com/nrdg/anat2vessels}
 \end{minipage}
 %
 \begin{minipage}[b]{0.1\linewidth}
@@ -273,49 +273,62 @@ Thanks to Kendrick Kay and Aviv Mezer for helpful discussions of this work.
 
 \subsection*{Training Results}
 
-Summarize your primary finding here. Explain what the model learned or what the analysis
-revealed, and why it is noteworthy. Quantify the result where possible (e.g., accuracy,
-error reduction, p-value).
+Evaluating the accuracy of the model on the held out training set with 5-fold
+cross validation, we find that model accuracy is similar between T2w and T1w+T2w
+inputs (dice$=0.52\pm 0.15, 0.55\pm 0.14$ respectively), but is substantially when using only T1w scans
+(dice$=0.37\pm 0.14$).
 
 \begin{minipage}[b]{1.0\linewidth}
   % Replace with \includegraphics[width=\linewidth]{main-result.png}
   \begin{center}
-
     \includegraphics{Figure1.png}
   \end{center}
-  \captionof{figure}{Caption for main result. Describe what is shown and highlight key takeaways.}
+  \captionof{figure}{5-fold Cross validation Dice scores.}
 \end{minipage}
 \\
 
-\begin{minipage}[t]{0.8\linewidth}
-  % Replace with \includegraphics[width=0.8\linewidth]{secondary-result.png}
-  \figplaceholder[10cm]{Secondary result figure}
-  \captionof{figure}{Caption for secondary result figure.}
+While mean Dice accuracy is not very high, features extracted from ground truth
+vessel masks have high correlations with morphological features extracted from
+model-predicted vessel masks.
+
+\begin{minipage}[b]{1.0\linewidth}
+  % Replace with \includegraphics[width=\linewidth]{main-result.png}
+  \begin{center}
+    \includegraphics[width=0.9\linewidth]{Figure2.png}
+  \end{center}
+  \captionof{figure}{Vessel Features from T1w+T2w predicted masks compared with COSTA
+  masks}
 \end{minipage}
 \\
 
-\subsection*{Main Result 2: [Descriptive Heading]}
+\subsection*{Independed Dataset Results}
 
-Present your second key result here. Include any statistical tests used and their outcomes
-(e.g., Mann–Whitney U test, p\,$<$\,0.05). Relate the result back to your research
-question \cite{ref4}.
 
 \begin{minipage}[t]{1.0\linewidth}
   % Replace with \includegraphics[width=0.8\linewidth]{comparison-figure.png}
-  \figplaceholder[12cm]{Quantitative comparison figure}
-  \captionof{figure}{Quantitative comparison showing [metric] across conditions.}
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{Figure3.png}
+    \end{center}
+  \captionof{figure}{Age prediction on CamCan dataset using 10-fold cross validation for
+  models that include only cortical thickness features (\textbf{A}), only
+  vessel features(\textbf{B}), and both (\textbf{C}). Here, variance explained,
+  $R^2$ is quantified as the coefficient of determination.}
+\end{minipage}
+
+
+\begin{minipage}[t]{1.0\linewidth}
+  % Replace with \includegraphics[width=0.8\linewidth]{comparison-figure.png}
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{Figure5.png}
+    \end{center}
+  \captionof{figure}{\textbf{a} While performance of \av~is overall rather good, with an
+average Dice of $0.471\pm0.19$ (SD), there is substantial portion of the
+distribution that is below 1.5xIQR below the median. Data quality (marked as
+``QC=0'', and ``QC=1'') differs based on Dice above or below the 1.5xIQR below
+the median. Examples of three different individuals with Dice coefficients of
+0.76 (\textbf{b}), 0.47 (\textbf{c}), and 0.13 (\textbf{d}) are shown.}
 \end{minipage}
 \\
-
-\section*{Additional Applications / Discussion}
-
-\begin{minipage}[t]{1\linewidth}
-  % Replace with \includegraphics[width=0.6\linewidth]{application-figure.png}
-  \figplaceholder[10cm]{Application or discussion figure}
-  \\
-  Describe any additional use cases or extensions of your method. Discuss implications,
-  limitations, and directions for future work.
-\end{minipage}
 
 %------------------------------------------------
 
@@ -325,9 +338,12 @@ question \cite{ref4}.
 
 \begin{itemize}
 \large
-  \item \textbf{Finding 1:} Concise statement of your first main conclusion.
-  \item \textbf{Finding 2:} Concise statement of your second main conclusion.
-  \item \textbf{Finding 3:} Broader implications or future directions.
+    \item Despite relatively low dice scores, the vessel features extracted from
+    anatomical MRI are predictive in downstream tasks, and capture individual variance well.
+    \item Vessel features extracted from Anatomical MRI are systematically biased
+    relative to ground truth.
+    \item Model features are linked to both cognitive ability (particularly within older individuals),
+    and to blood pressure, consistent with previous findings (xxx cite).
 \end{itemize}
 
 \color{DarkSlateGray}
