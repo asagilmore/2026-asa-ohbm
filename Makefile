@@ -10,8 +10,6 @@ all: $(REPORT).pdf
 
 $(REPORT).pdf: $(SRCS) $(REFS) $(FIGS)
 	$(LATEX) $(REPORT)
-	$(BIBTEX) $(REPORT)
-	$(LATEX) $(REPORT)
 	$(LATEX) $(REPORT)
 
 clean:
