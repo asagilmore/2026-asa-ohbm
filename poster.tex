@@ -10,14 +10,29 @@
 
 
 % NOTES
-% fix paragraph indentation (remove) in most places.
-% Caption for figure 3
+% fix paragraph indentation (remove) in most places. ~
+% Caption for figure 3 ~
 % Make brain images above text and larger in figure 3
 % Dice score capitalized everywhere
 % training resuls is bad name remove, change Independent dataset results -> generalizationd dataset
 % add hypertension results
 % in conclusion mention additive information with freesurfer!
-%
+% Maybe Diagram of UNet (see screenshot from slack)
+
+% figure 5 fix caption, maybe add 6 subplots including oasis too
+% talk about particular utility
+% mention alzhimers too
+% camacan -> health dataset -> oasis unhealthyl
+% make figures linking  to bullet points maybe cite
+% three parts of results mapping to methods dice, features, downsteram datasets
+
+% introduction not in two columns and shorter
+% Figure 1 dont' explain GT = Ground truth
+% figure 1 make have images in it t1 t2 ...
+
+
+
+
 
 \documentclass[a0, portrait]{a0poster}
 
@@ -40,6 +55,7 @@
 \usepackage{wrapfig}
 \usepackage{url}
 
+\setlength{\parindent}{0pt}
 %-------------------------------------------------------------------------------
 %  FIGURE PLACEHOLDER COMMAND
 %  Usage: \figplaceholder[height]{label text}
@@ -149,11 +165,9 @@ software at https://github.com/nrdg/anat2vessels.
 \subsection*{Dataset}
 We used the publicly available IXI dataset (\url{http://brain-development.org/ixi-dataset/}),
 containing T1w, T2w, and MRA for N=567 subjects.
-
 During training the dataset was randomly split into train (N=427) and test (N=106)
 samples, following the standard nnUNet procedure using 5-fold cross-validation,
 stratified by scanner.
-
 Instead of using the raw MRA images as labels, we used
 COSTA (xxx Cite), a pretrained model for segmenting blood vessels in MRA, to produce binary
 vessel masks from the MRA images to use as training labels.
@@ -255,12 +269,14 @@ within one year from cognitive assessments.
 
 \begin{itemize}
 \large
-    \item Despite relatively low dice scores, the vessel features extracted from
+    \item Despite relatively low Dice scores, the vessel features extracted from
     anatomical MRI are predictive in downstream tasks, and capture individual variance well.
     \item Vessel features extracted from Anatomical MRI are systematically biased
     relative to ground truth.
     \item Model features are linked to both cognitive ability (particularly within older individuals),
     and to blood pressure, consistent with previous findings (xxx cite).
+    \item Model features provide additive information with freesurfer derivatives
+    extracted from the same T1w and T2w scans.
 \end{itemize}
 
 \color{DarkSlateGray}
@@ -305,19 +321,18 @@ Thanks to Kendrick Kay and Aviv Mezer for helpful discussions of this work.
 \captionsetup{textfont={color=Navy},labelfont={bf,color=Navy}}
 \section*{Results}
 
-\subsection*{Training Results}
-
 Evaluating the accuracy of the model on the held out training set with 5-fold
 cross validation, we find that model accuracy is similar between T2w and T1w+T2w
-inputs (dice$=0.52\pm 0.15, 0.55\pm 0.14$ respectively), but is substantially when using only T1w scans
-(dice$=0.37\pm 0.14$).
+inputs (Dice$=0.52\pm 0.15, 0.55\pm 0.14$ respectively), but is lower when using only T1w scans
+(Dice$=0.37\pm 0.14$).
 
 \begin{minipage}[b]{1.0\linewidth}
   % Replace with \includegraphics[width=\linewidth]{main-result.png}
   \begin{center}
     \includegraphics{Figure1.png}
   \end{center}
-  \captionof{figure}{5-fold Cross validation Dice scores.}
+  \captionof{figure}{ Example segmentation images for \textbf{A} T2w \text{B} T1w \textbf{C} T1w+T2w
+  \textbf{D} 5-fold Cross validation Dice scores of segmentations relative to MRA derived COSTA labels}
 \end{minipage}
 \\
 
@@ -335,7 +350,7 @@ model-predicted vessel masks.
 \end{minipage}
 \\
 
-\subsection*{Independed Dataset Results}
+\subsection*{Generalization Datasets}
 
 
 \begin{minipage}[t]{1.0\linewidth}
@@ -363,6 +378,19 @@ the median. Examples of three different individuals with Dice coefficients of
 0.76 (\textbf{b}), 0.47 (\textbf{c}), and 0.13 (\textbf{d}) are shown.}
 \end{minipage}
 \\
+
+
+
+\begin{minipage}[t]{1.0\linewidth}
+  % Replace with \includegraphics[width=0.8\linewidth]{comparison-figure.png}
+    \begin{center}
+        \includegraphics[width=0.9\linewidth]{Figure4.png}
+    \end{center}
+  \captionof{figure}{Age dependence of vessel features in the CamCan dataset.
+  Individuals with hypertension are identified as filled circles. Lines indicate age-bin
+  averaged features for hypertensive ("H") and normotensive ("N") individuals,
+  with bootstrapped 95\% CI (age bins: $<50, 50-60,60-70,70-80, >80$)}
+\end{minipage}
 
 \color{Black}
 \rule{\linewidth}{2pt}
