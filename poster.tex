@@ -56,6 +56,7 @@
 \usepackage{url}
 
 \setlength{\parindent}{0pt}
+\raggedbottom
 %-------------------------------------------------------------------------------
 %  FIGURE PLACEHOLDER COMMAND
 %  Usage: \figplaceholder[height]{label text}
@@ -133,8 +134,6 @@ using deep learning} \color{Black}\\
 %   \logoplaceholder{10cm}{Logo}
 \end{minipage}
 
-\vspace{0.5cm}
-
 %----------------------------------------------------------------------------------------
 
 
@@ -142,8 +141,9 @@ using deep learning} \color{Black}\\
 %	INTRODUCTION
 %----------------------------------------------------------------------------
 
+\vspace*{-1cm}
 \section*{Introduction}
-
+\vspace*{-0.5cm}
 Non-invasive measurements of brain blood vessels with magnetic
 resonance angiography (MRA) provide important information about brain health
 and aging. But MRA is time-consuming and is not as commonly used as anatomical
@@ -161,6 +161,7 @@ software at https://github.com/nrdg/anat2vessels.
 \rule{\linewidth}{2pt}
 
 \begin{multicols}{2}
+\raggedcolumns
 
 %----------------------------------------------------------------------------
 %	MATERIALS AND METHODS
@@ -174,30 +175,34 @@ During training the dataset was randomly split into train (N=427) and test (N=10
 samples, following the standard nnUNet procedure using 5-fold cross-validation,
 stratified by scanner.
 Instead of using the raw MRA images as labels, we used
-COSTA (xxx Cite), a pretrained model for segmenting blood vessels in MRA, to produce binary
+COSTA \cite{ref1}, a pretrained model for segmenting blood vessels in MRA, to produce binary
 vessel masks from the MRA images to use as training labels.
 
 \subsection*{Model / Algorithm}
 
-We used the popular (xxx cite) nnUNet architecture, implementing their nnUNet ResEnc L
+We used the popular nnUNet architecture \cite{ref2}, implementing their nnUNet ResEnc L
 model, trained with Dice and BCE loss.
+\\
 
 \begin{minipage}[b]{\linewidth}
 
   \centering
   \makebox[\textwidth][c]{%
   \begin{tikzpicture}[scale=1.5]
-    \node at (1,6) {IXI dataset};
-    \node[draw, fill=blue!5, rounded corners, minimum width=3cm, minimum height=8cm, drop shadow] at (1,3) {};
+    % \node at (0,6) {IXI dataset};
+    % \node[draw, fill=blue!5, rounded corners, minimum width=3cm, minimum height=8cm, drop shadow] at (,3) {};
 
-    \node[draw, fill=blue!20, top color=blue!30, bottom color=blue!10, rounded corners, minimum width=1.4cm, minimum height=1cm, drop shadow] at (1,5) (mra) {MRA};
-    \node[draw, fill=blue!20, top color=blue!30, bottom color=blue!10, rounded corners, minimum width=1.4cm, minimum height=1cm, drop shadow] at (1,3) (t1w) {T1w};
-    \node[draw, fill=blue!20, top color=blue!30, bottom color=blue!10, rounded corners, minimum width=1.4cm, minimum height=1cm, drop shadow] at (1,1) (t2w) {T2w};
+    \node[inner sep=0pt, drop shadow, label={[font=\small\bfseries]right:MRA}]
+          at (16,2.25) (mra) {\includegraphics[width=6cm]{mri/mra_slice.png}};
+    \node[inner sep=0pt, drop shadow, label={[font=\small\bfseries]left:T1w}]
+          at (1,4.5) (t1w) {\includegraphics[width=5cm]{mri/t1w_slice.png}};
+    \node[inner sep=0pt, drop shadow, label={[font=\small\bfseries]left:T2w}]
+          at (1,0.5) (t2w) {\includegraphics[width=5cm]{mri/t2w_slice.png}};
 
-    \node[draw, fill=white, rounded corners, minimum width=2cm, minimum height=2cm, drop shadow] at (5,5) (costa) {COSTA};
+    \node[draw, fill=white, rounded corners, minimum width=2cm, minimum height=2cm, drop shadow] at (12.5,5) (costa) {COSTA};
     \node[draw, fill=green!20, top color=green!30, bottom color=green!10, rounded corners, minimum width=2cm, minimum height=2cm, drop shadow] at (5,2) (nn) {\av};
 
-    \node[draw, fill=white, rounded corners, minimum width=1.5cm, minimum height=1cm, drop shadow] at (8.75,5) (gtmask) {GT mask};
+    \node[draw, fill=white, rounded corners, minimum width=1.5cm, minimum height=1cm, drop shadow] at (8.75,5) (gtmask) {Binary mask};
     \node[draw, fill=white, rounded corners, minimum width=1.5cm, minimum height=1cm, drop shadow] at (8.75,3.5) (loss) {Dice + BCE};
     \node[draw, fill=red!20, rounded corners, minimum width=1.5cm, minimum height=1cm, drop shadow] at (8.75,2) (predmask) {Pred Mask};
 
@@ -220,7 +225,6 @@ model, trained with Dice and BCE loss.
 %   \figplaceholder[10cm]{Model architecture or pipeline}
   \captionof{figure}{~\av  training pipeline}
 \end{minipage}
-\\
 
 \subsection*{Downstream Analysis}
 
@@ -279,41 +283,32 @@ within one year from cognitive assessments.
     \item Vessel features extracted from Anatomical MRI are systematically biased
     relative to ground truth.
     \item Model features are linked to both cognitive ability (particularly within older individuals),
-    and to blood pressure, consistent with previous findings (xxx cite).
+    and to blood pressure, consistent with previous findings (xxx cite). % Ariel maybe has citation for this?
     \item Model features provide additive information with freesurfer derivatives
     extracted from the same T1w and T2w scans.
 \end{itemize}
 
-\color{DarkSlateGray}
-
-\color{DarkSlateGray}
+\color{Black}
+\rule{\linewidth}{2pt}
 \section*{Acknowledgements}
-% \footnotesize This work was funded by National Institutes of Health grants MH121868,
-% MH121867, EB027585, R01AG060942, and U19AG066567, as well as by National
-% Science Foundation grant 1934292 and by Research to Prevent Blindness.
 
-% Preliminary testing for this work was completed on Hyak, UW's high performance
-% computing cluster. This resource was funded by the UW student technology fee.
+XXX Fill in
 
-% Data collection and sharing for this project was provided by the Cambridge
-% Centre for Ageing and Neuroscience (CamCAN). CamCAN funding was provided by the
-% UK Biotechnology and Biological Sciences Research Council (grant number
-% BB/H008217/1), together with support from the UK Medical Research Council and
-% University of Cambridge, UK.
+\begin{thebibliography}{9}
+\footnotesize
 
-% Data were provided in part by OASIS: OASIS-3: Longitudinal Multimodal
-% Neuroimaging: Principal Investigators: T. Benzinger, D. Marcus, J. Morris; NIH
-% P30 AG066444, P50 AG00561, P30 NS09857781, P01 AG026276, P01 AG003991, R01
-% AG043434, UL1 TR000448, R01 EB009352.
+\bibitem{ref1}
+Mou, L., Yan, Q., Lin, J., Zhao, Y., Liu, Y., Ma, S., Zhang, J., Lv, W., Zhou, T., Frangi, A. F., Zhao, Y.
+\textit{COSTA: A multi-center TOF-MRA dataset and a style self-consistency network for cerebrovascular segmentation}.
+IEEE Transactions on Medical Imaging, vol.~43, pp.~1--1, 2024.
 
-% Thanks to Kendrick Kay and Aviv Mezer for helpful discussions of this work.
+\bibitem{ref2}
+Isensee, F., Jaeger, P. F., Kohl, S. A., Petersen, J., Maier-Hein, K. H.
+\textit{nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation}.
+Nature Methods, vol.~18, pp.~203--211, 2021.
 
-% %----------------------------------------------------------------------------
-%	REFERENCES
-%----------------------------------------------------------------------------
-% Dummy references — replace with your own entries or switch to BibTeX:
-%   \bibliographystyle{plain}
-%   \bibliography{your-bib-file}
+
+\end{thebibliography}
 
 \columnbreak
 
@@ -324,8 +319,7 @@ within one year from cognitive assessments.
 \normalsize
 \color{Navy}
 \captionsetup{textfont={color=Navy},labelfont={bf,color=Navy}}
-\section*{Results}
-
+\subsection*{Results}
 Evaluating the accuracy of the model on the held out training set with 5-fold
 cross validation, we find that model accuracy is similar between T2w and T1w+T2w
 inputs (Dice$=0.52\pm 0.15, 0.55\pm 0.14$ respectively), but is lower when using only T1w scans
@@ -334,26 +328,24 @@ inputs (Dice$=0.52\pm 0.15, 0.55\pm 0.14$ respectively), but is lower when using
 \begin{minipage}[b]{1.0\linewidth}
   % Replace with \includegraphics[width=\linewidth]{main-result.png}
   \begin{center}
-    \includegraphics{Figure1.png}
+    \includegraphics[width=\linewidth]{svg/Fig3.png}
   \end{center}
   \captionof{figure}{ Example segmentation images for \textbf{A} T2w \text{B} T1w \textbf{C} T1w+T2w
   \textbf{D} 5-fold Cross validation Dice scores of segmentations relative to MRA derived COSTA labels}
 \end{minipage}
-\\
 
-While mean Dice accuracy is not very high, features extracted from ground truth
+Features extracted from ground truth
 vessel masks have high correlations with morphological features extracted from
 model-predicted vessel masks.
 
 \begin{minipage}[b]{1.0\linewidth}
   % Replace with \includegraphics[width=\linewidth]{main-result.png}
   \begin{center}
-    \includegraphics[width=0.9\linewidth]{Figure2.png}
+    \includegraphics[width=0.9\linewidth]{svg/Figure2.png}
   \end{center}
   \captionof{figure}{Vessel Features from T1w+T2w predicted masks compared with COSTA
   masks}
 \end{minipage}
-\\
 
 \subsection*{Generalization Datasets}
 
@@ -370,19 +362,19 @@ model-predicted vessel masks.
 \end{minipage}
 
 
-\begin{minipage}[t]{1.0\linewidth}
-  % Replace with \includegraphics[width=0.8\linewidth]{comparison-figure.png}
-    \begin{center}
-        \includegraphics[width=0.9\linewidth]{Figure5.png}
-    \end{center}
-  \captionof{figure}{\textbf{a} While performance of \av~is overall rather good, with an
-average Dice of $0.471\pm0.19$ (SD), there is substantial portion of the
-distribution that is below 1.5xIQR below the median. Data quality (marked as
-``QC=0'', and ``QC=1'') differs based on Dice above or below the 1.5xIQR below
-the median. Examples of three different individuals with Dice coefficients of
-0.76 (\textbf{b}), 0.47 (\textbf{c}), and 0.13 (\textbf{d}) are shown.}
-\end{minipage}
-\\
+% \begin{minipage}[t]{1.0\linewidth}
+%   % Replace with \includegraphics[width=0.8\linewidth]{comparison-figure.png}
+%     \begin{center}
+%         \includegraphics[width=0.9\linewidth]{Figure5.png}
+%     \end{center}
+%   \captionof{figure}{\textbf{a} While performance of \av~is overall rather good, with an
+% average Dice of $0.471\pm0.19$ (SD), there is substantial portion of the
+% distribution that is below 1.5xIQR below the median. Data quality (marked as
+% ``QC=0'', and ``QC=1'') differs based on Dice above or below the 1.5xIQR below
+% the median. Examples of three different individuals with Dice coefficients of
+% 0.76 (\textbf{b}), 0.47 (\textbf{c}), and 0.13 (\textbf{d}) are shown.}
+% \end{minipage}
+% \\
 
 
 
@@ -397,34 +389,6 @@ the median. Examples of three different individuals with Dice coefficients of
   with bootstrapped 95\% CI (age bins: $<50, 50-60,60-70,70-80, >80$)}
 \end{minipage}
 
-\color{Black}
-\rule{\linewidth}{2pt}
-
-
-\begin{thebibliography}{9}
-\footnotesize
-
-\bibitem{ref1}
-Author A, Author B.
-\textit{Title of Reference 1}.
-Journal Name, vol.~X, pp.~1--10, Year.
-
-\bibitem{ref2}
-Author C, Author D.
-\textit{Title of Reference 2}.
-Conference Name, pp.~1--8, Year.
-
-\bibitem{ref3}
-Author E.
-\textit{Title of Reference 3}.
-Journal Name, vol.~Y, pp.~100--110, Year.
-
-\bibitem{ref4}
-Author F, Author G, Author H.
-\textit{Title of Reference 4}.
-Journal Name, vol.~Z, pp.~200--215, Year.
-
-\end{thebibliography}
 
 %----------------------------------------------------------------------------
 
