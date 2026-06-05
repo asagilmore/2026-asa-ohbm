@@ -193,7 +193,7 @@ model, trained with Dice and BCE loss.
     % \node[draw, fill=blue!5, rounded corners, minimum width=3cm, minimum height=8cm, drop shadow] at (,3) {};
 
     \node[inner sep=0pt, drop shadow, label={[font=\small\bfseries]right:MRA}]
-          at (16,2.25) (mra) {\includegraphics[width=6cm]{mri/mra_slice.png}};
+          at (16.5,2.25) (mra) {\includegraphics[width=6cm]{mri/mra_slice.png}};
     \node[inner sep=0pt, drop shadow, label={[font=\small\bfseries]left:T1w}]
           at (1,4.5) (t1w) {\includegraphics[width=5cm]{mri/t1w_slice.png}};
     \node[inner sep=0pt, drop shadow, label={[font=\small\bfseries]left:T2w}]
@@ -216,7 +216,7 @@ model, trained with Dice and BCE loss.
     \draw[arrows = {-Latex[width=5pt, length=5pt]}] (predmask) -- (loss);
     \draw[arrows = {-Latex[width=5pt, length=5pt]}, bend right] (loss) to (nn);
   \end{tikzpicture}
-  }
+}
 %  \captionsetup{labelformat=empty}
 
 %   \caption{The~\av training pipeline.}
