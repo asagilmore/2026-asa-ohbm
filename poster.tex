@@ -119,7 +119,7 @@ using deep learning} \color{Black}\\
          5. Roger and Angie Karalis Johnson Retina Center, University of Washington,
          6. Department of Ophthalmology and Visual Sciences, Washington University, \\
          7. Krembil Centre for Neuroinformatics, Centre for Addiction and Mental Health \\
-  \large *Contact: \texttt{arokem@uw.edu}
+  \large *Contact: \texttt{Ariel.Rokem@camh.ca}
          $|$ Download: \texttt{https://github.com/nrdg/anat2vessels}
 \end{minipage}
 %
@@ -180,7 +180,7 @@ vessel masks from the MRA images to use as training labels.
 
 \subsection*{Model / Algorithm}
 
-We used the popular nnUNet architecture \cite{ref2}, implementing their nnUNet ResEnc L
+We used the widely used nnUNet architecture \cite{ref2}, implementing their nnUNet ResEnc L
 model, trained with Dice and BCE loss.
 \\
 
@@ -228,10 +228,8 @@ model, trained with Dice and BCE loss.
 
 \subsection*{Downstream Analysis}
 
-In downstream analysis, the training losses of Dice and BCE fail to provide a
-picture of the anatomical accuracy of the model (XXX awkward wording fix).
-To evaluate the accuracy we implemented the following extraction of anatomical features
-from the vessel masks: Branch length, Bifurcation Count, Endpoint Count, Vessel Radii, Vessel volume, and Branch Count.
+%In downstream analysis, the training losses of Dice and BCE fail to provide a picture of the anatomical accuracy of the model (XXX awkward wording fix). % AR: I don't think we need this sentence. 
+The following morphological features were extracted from the binary vessel masks: branch length, bifurcation count, endpoint count, vessel radii, vessel volume, and branch count.
 
 
 
@@ -283,7 +281,7 @@ within one year from cognitive assessments.
     \item Vessel features extracted from Anatomical MRI are systematically biased
     relative to ground truth.
     \item Model features are linked to both cognitive ability (particularly within older individuals),
-    and to blood pressure, consistent with previous findings (xxx cite). % Ariel maybe has citation for this?
+    and to blood pressure, consistent with previous findings (e.g., van Dalen et al., 2022)
     \item Model features provide additive information with freesurfer derivatives
     extracted from the same T1w and T2w scans.
 \end{itemize}
@@ -292,7 +290,10 @@ within one year from cognitive assessments.
 \rule{\linewidth}{2pt}
 \section*{Acknowledgements}
 
-XXX Fill in
+Funding support from National Institutes of Health grants MH121868, MH121867, EB027585, R01AG060942, and U19AG066567, as well as from National
+Science Foundation grant 1934292 and from Research to Prevent Blindness. 
+
+Data collection and sharing for this project was provided by the Cambridge Centre for Ageing and Neuroscience (CamCAN) and by OASIS-3: Longitudinal Multimodal Neuroimaging.
 
 \begin{thebibliography}{9}
 \footnotesize
@@ -306,6 +307,11 @@ IEEE Transactions on Medical Imaging, vol.~43, pp.~1--1, 2024.
 Isensee, F., Jaeger, P. F., Kohl, S. A., Petersen, J., Maier-Hein, K. H.
 \textit{nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation}.
 Nature Methods, vol.~18, pp.~203--211, 2021.
+
+\bibitem{ref3}
+van Dalen, J.W., Brayne, C., Crane, P.K., Fratiglioni, L., Larson, E.B., Lobo, A., Lobo, E., Marcum, Z.A., Moll van Charante, E.P., Qiu, C., Riedel-Heller, S.G., Röhr, S., Rydén, L., Skoog, I., van Gool, W.A., Richard, E
+\textit{Association of systolic blood pressure with dementia risk and the role of age, {U}-shaped associations, and mortality}.
+JAMA Intern. Med., vol.~182, pp.~142--152, 2022.
 
 
 \end{thebibliography}
@@ -330,8 +336,8 @@ inputs (Dice$=0.52\pm 0.15, 0.55\pm 0.14$ respectively), but is lower when using
   \begin{center}
     \includegraphics[width=\linewidth]{svg/Fig3.png}
   \end{center}
-  \captionof{figure}{ Example segmentation images for \textbf{A} T2w \text{B} T1w \textbf{C} T1w+T2w
-  \textbf{D} 5-fold Cross validation Dice scores of segmentations relative to MRA derived COSTA labels}
+  \captionof{figure}{ Example segmentation images for T2w (\textbf{a}) T1w (\textbf{b} ) and T1w+T2w (\textbf{c}).
+   5-fold cross-validation Dice scores of segmentations relative to MRA derived COSTA labels (\textbf{d})}
 \end{minipage}
 
 Features extracted from ground truth
@@ -356,8 +362,8 @@ model-predicted vessel masks.
         \includegraphics[width=0.9\linewidth]{Figure3.png}
     \end{center}
   \captionof{figure}{Age prediction on CamCan dataset using 10-fold cross validation for
-  models that include only cortical thickness features (\textbf{A}), only
-  vessel features(\textbf{B}), and both (\textbf{C}). Here, variance explained,
+  models that include only cortical thickness features (\textbf{a}), only
+  vessel features(\textbf{b}), and both (\textbf{c}). Here, variance explained,
   $R^2$ is quantified as the coefficient of determination.}
 \end{minipage}
 
@@ -384,9 +390,9 @@ model-predicted vessel masks.
         \includegraphics[width=0.9\linewidth]{Figure4.png}
     \end{center}
   \captionof{figure}{Age dependence of vessel features in the CamCan dataset.
-  Individuals with hypertension are identified as filled circles. Lines indicate age-bin
-  averaged features for hypertensive ("H") and normotensive ("N") individuals,
-  with bootstrapped 95\% CI (age bins: $<50, 50-60,60-70,70-80, >80$)}
+  Individuals with hypertension are identified in blue. Lines indicate age-bin
+  averaged features for hypertensive (blue) and normotensive (orange) individuals,
+  with bootstrapped 95\% CI (age bins: $<50, 50-60, 60-70, 70-80, >80$)}
 \end{minipage}
 
 
