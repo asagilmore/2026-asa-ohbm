@@ -228,7 +228,7 @@ model, trained with Dice and BCE loss.
 
 \subsection*{Downstream Analysis}
 
-%In downstream analysis, the training losses of Dice and BCE fail to provide a picture of the anatomical accuracy of the model (XXX awkward wording fix). % AR: I don't think we need this sentence. 
+%In downstream analysis, the training losses of Dice and BCE fail to provide a picture of the anatomical accuracy of the model (XXX awkward wording fix). % AR: I don't think we need this sentence.
 The following morphological features were extracted from the binary vessel masks: branch length, bifurcation count, endpoint count, vessel radii, vessel volume, and branch count.
 
 
@@ -275,13 +275,13 @@ within one year from cognitive assessments.
 \section*{Conclusions}
 
 \begin{itemize}
-\large
+\normalsize
     \item Despite relatively low Dice scores, the vessel features extracted from
     anatomical MRI are predictive in downstream tasks, and capture individual variance well.
     \item Vessel features extracted from Anatomical MRI are systematically biased
     relative to ground truth.
     \item Model features are linked to both cognitive ability (particularly within older individuals),
-    and to blood pressure, consistent with previous findings (e.g., van Dalen et al., 2022)
+    and to blood pressure, consistent with previous findings \cite{ref3}
     \item Model features provide additive information with freesurfer derivatives
     extracted from the same T1w and T2w scans.
 \end{itemize}
@@ -291,7 +291,7 @@ within one year from cognitive assessments.
 \section*{Acknowledgements}
 
 Funding support from National Institutes of Health grants MH121868, MH121867, EB027585, R01AG060942, and U19AG066567, as well as from National
-Science Foundation grant 1934292 and from Research to Prevent Blindness. 
+Science Foundation grant 1934292 and from Research to Prevent Blindness.
 
 Data collection and sharing for this project was provided by the Cambridge Centre for Ageing and Neuroscience (CamCAN) and by OASIS-3: Longitudinal Multimodal Neuroimaging.
 
